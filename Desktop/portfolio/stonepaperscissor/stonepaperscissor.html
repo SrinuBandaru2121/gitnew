@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+
+        }
+
+        .title {
+            text-align: center;
+            font-size: 60px;
+            background-color: rgb(161, 209, 209);
+            line-height: 60px;
+           
+
+        }
+
+        #container {
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .image {
+            height: 300px;
+            width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        .image:hover{
+            opacity: 0.7;
+            cursor: pointer;
+            background-color: black;
+        }
+        img {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        #container2 {
+            margin-top: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        #comsco ,  #yousco {
+            text-align: center;
+        }
+
+        #userscore,#comscore{
+            font-size: 60px;
+        }
+
+        #disres {
+            margin-top: 60px;
+            align-items: center;
+            justify-content: center;
+            display: flex;  
+
+        }
+         #dis {
+            font-size: 40px;
+            background-color: rgb(26, 24, 24);
+            color: aliceblue;
+            display: inline;
+            padding: 1rem;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">ROCK PAPER SCISSORS</h1>
+    <div id="container">
+        <div class="image" id="rock">
+            <img src="rock.png" alt="">
+        </div>
+        <div class="image" id="paper">
+            <img src="paper.png" alt="">
+        </div>
+        <div class="image" id="scissor">
+            <img src="scissors.png" alt="">
+        </div>
+    </div>
+    <div id="container2">
+        <div id="yousco" class="divdis">
+            <h1>YOUR SCORE</h1>
+            <h3 id="userscore">0</h3>
+        </div>
+        <div id="comsco" class="divdis">
+            <h1>COMPUTER SCORE</h1>
+            <h3 id="comscore">0</h3>
+        </div>
+    </div>
+    <div id="disres">
+        <h2 id="dis">you won</h2>
+    </div>
+    <script >
+      let userScore=0;
+      let comScore=0;  
+      const choices=document.querySelectorAll(".image")
+      let compGame=()=>{
+          let list=["paper","rock","scissor"]
+          let index=Math.floor(Math.random()*3)
+          return list[index];
+
+      }
+      let drawGame=()=>{
+          let msg=document.getElementById("dis");
+          msg.innerHTML="game was drawn";
+      }
+      let winGame=()=>{
+          let msg=document.getElementById("dis");
+          msg.innerHTML="you won";
+          userScore++;
+          let user=document.getElementById("userscore");
+          user.innerHTML=userScore;
+      }
+      let loseGame=()=>{
+        let msg=document.getElementById("dis");
+        msg.innerHTML="you lost";
+        comScore++;
+        let comp=document.getElementById("comscore");
+        comp.innerHTML=comScore;
+      }
+
+      let playGame=(userChoice)=>{
+        let compChoice=compGame()
+        console.log(userChoice)
+        console.log(compChoice)
+        if(userChoice==compChoice){
+            drawGame()
+        }else if(userChoice==="rock"){
+            compChoice==="scissor"?winGame():loseGame()
+        }
+        else if(userChoice==="scissor"){
+            compChoice==="paper"?winGame():loseGame()
+        }
+        else if(userChoice==="paper"){
+            compChoice==="rock"?winGame():loseGame()
+        }
+      }
+      choices.forEach((choice)=>{
+        choice.addEventListener("click",()=>{
+            const userChoice=choice.getAttribute("id") 
+            playGame(userChoice)
+        })
+      })
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
